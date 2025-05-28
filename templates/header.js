@@ -11,8 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const siteTitle = document.querySelector('.site-title');
     const menuToggle = document.querySelector('.menu-toggle');
     const mainNav = document.querySelector('.main-navigation');
-    const scrollThreshold = 300;
-    const bufferZone = 100; // Increased buffer zone
+    const siteHeader = document.querySelector('.site-header');
+    const scrollThreshold = 300;  // Shrink at 300px
+    const expandThreshold = 100;  // Expand at 100px
     let isFading = false;
     let currentOpacity = 1;
     let lastScrollY = window.scrollY;
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             requestAnimationFrame(fadeOut);
         } else {
             siteTitle.classList.add('hidden');
+            siteHeader.classList.add('shrunk');
             isFading = false;
             isHidden = true;
         }
@@ -57,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             siteTitle.style.opacity = currentOpacity;
             requestAnimationFrame(fadeIn);
         } else {
+            siteHeader.classList.remove('shrunk');
             isFading = false;
             isHidden = false;
         }
@@ -76,19 +79,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Set a new timeout
         scrollTimeout = setTimeout(() => {
-            if (currentScrollY > scrollThreshold + bufferZone) {
+            if (currentScrollY > scrollThreshold) {
                 if (!isHidden) {
                     isFading = true;
                     fadeOut();
                 }
-            } else if (currentScrollY < scrollThreshold - bufferZone) {
+            } else if (currentScrollY < expandThreshold) {
                 if (isHidden) {
                     siteTitle.classList.remove('hidden');
                     isFading = true;
                     fadeIn();
                 }
             }
-        }, 50); // Small delay to ensure scroll has stopped
+        }, 50);
     }
 
     // Initial check

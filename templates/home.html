@@ -16,7 +16,7 @@
           {{#if logo}}
           <img src="/{{logo}}" alt="{{siteName}}" class="h-8">
           {{else}}
-          <span class="text-xl font-bold">{{siteName}}</span>
+          <span class="text-3xl font-bold">{{siteName}}</span>
           {{/if}}
         </h1>
         <nav class="main-navigation">
@@ -32,7 +32,7 @@
   </header>
   {{#if heroBanner}}
   <div class="hero-banner">
-    <img src="/{{heroBanner}}" alt="Hero Banner" class="w-full h-64 object-cover">
+    <img src="{{heroBanner}}" alt="Hero Banner" class="w-full h-64 object-cover">
     <div class="hero-overlay">
       <h1 class="text-4xl font-bold text-white">{{title}}</h1>
     </div>
